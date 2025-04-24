@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Card</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @font-face {
+      font-family: 'IranKharazmi';
+      src: url('IRAN Kharazmi.ttf');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'IranKharazmi', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #f5f5f5, #e3e3e3, #fafafa, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: #fff;
+      color: #000;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+
+    .banner {
+      height: 120px;
+      position: relative;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-pic {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      position: absolute;
+      bottom: -45px;
+      left: 20px;
+      overflow: hidden;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .message-btn {
+      position: absolute;
+      right: 20px;
+      top: 85px;
+      background: #2e2e2e;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #fff;
+    }
+
+    .message-btn:hover {
+      background: #03b2bb;
+      color: black;
+    }
+
+    .info {
+      padding: 60px 20px 20px;
+    }
+
+    .name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 8px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .stats div {
+      color: #03b2bb;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .stats div small {
+      display: block;
+      color: #777;
+      font-size: 14px;
+      font-weight: normal;
+    }
+
+    .tab-section {
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tab {
+      padding: 6px 12px;
+      cursor: pointer;
+      color: #888;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .tab.active {
+      color: #03b2bb;
+      border-color: #03b2bb;
+    }
+
+    .tab-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .badges, .connections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      background: #03b2bb;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .button {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #03b2bb;
+      border-radius: 10px;
+      color: #03b2bb;
+      background: rgba(3, 178, 187, 0.1);
+      text-align: center;
+      cursor: pointer;
+      flex: 1 1 100%;
+    }
+
+    @media (min-width: 480px) {
+      .button {
+        flex: 1 1 45%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="banner">
+    <img src="2.jpg" alt="Banner" />
+    <div class="profile-pic">
+      <img src="1.jpg" alt="Profile Picture" />
+    </div>
+    <div class="message-btn">Message</div>
+  </div>
+  <div class="info">
+    <div class="name">AmiRHossein Malek</div>
+    <div class="meta">#0001 • he/him</div>
+    <div class="stats">
+      <div>32<small>Blogs</small></div>
+      <div>1.689K<small>Viewer</small></div>
+      <div>167<small>Friends</small></div>
+    </div>
+
+    <div class="tab-section">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('about', this)">About Me</div>
+        <div class="tab" onclick="showTab('charts', this)">Charts</div>
+        <div class="tab" onclick="showTab('channels', this)">Channels</div>
+      </div>
+      <div class="tab-content" id="about">
+        <p>● I'm a 16-year-old developer</p>
+        <p>● An educationist interested in chess and cybersecurity 😊</p>
+        <h4 style="color:#03b2bb; margin-top:10px;">Badges</h4>
+        <div class="badges">
+          <div class="badge">photo 3</div>
+          <div class="badge">photo 4</div>
+          <div class="badge">photo 5</div>
+          <div class="badge">photo 6</div>
+        </div>
+        <h4 style="color:#03b2bb; margin-top:15px;">Connections</h4>
+        <div class="connections">
+          <div class="button">Instagram</div>
+          <div class="button">Discord</div>
+        </div>
+      </div>
+      <div class="tab-content" id="charts" style="display:none;">
+        <canvas id="courseChart" width="300" height="300"></canvas>
+      </div>
+      <div class="tab-content" id="channels" style="display:none;">
+        <p>📺 Channels info goes here...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(id, el) {
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    el.classList.add('active');
+    if(id === 'charts') drawChart();
+  }
+
+  let chartDrawn = false;
+  function drawChart() {
+    if (chartDrawn) return;
+    const ctx = document.getElementById('courseChart');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['C', 'SCU', 'Network+', 'Illustrator', 'Python', 'HTML'],
+        datasets: [{
+          data: [1, 1, 1, 1, 1, 1],
+          backgroundColor: ['#03b2bb', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#333'
+            }
+          }
+        }
+      }
+    });
+    chartDrawn = true;
+  }
+</script>
+
+</body>
+</html>
